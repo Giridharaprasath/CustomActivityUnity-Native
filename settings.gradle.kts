@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Custom Activity Unity"
 include(":app")
+include(":app:toastunity")

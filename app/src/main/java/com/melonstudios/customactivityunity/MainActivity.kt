@@ -3,6 +3,8 @@ package com.melonstudios.customactivityunity
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,7 +43,7 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Button(onClick = {
-                            showToastDemo()
+                            toastDemo()
                         }) {
                             Text(text = "Show Toast Demo", color = Color.White)
                         }
@@ -63,13 +65,18 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Text(text = "Show Snack Bar Demo", color = Color.White)
                         }
+                        Button(onClick = {
+                            vibrationDemo()
+                        }) {
+                            Text(text = "Show Vibration Demo Click Effect", color = Color.White)
+                        }
                     }
                 }, snackbarHost = { SnackbarHost(hostState = snackBarHostState) })
             }
         }
     }
 
-    fun showToastDemo() {
+    fun toastDemo() {
         Toast.makeText(this, "Sample Toast Demo", Toast.LENGTH_SHORT).show()
     }
 
@@ -81,7 +88,7 @@ class MainActivity : ComponentActivity() {
     fun alertDialogWithCloseButtonDemo() {
         AlertDialog.Builder(this).setTitle("Sample Alert Dialog")
             .setMessage("Sample Alert Dialog Demo With Close Button Message").setCancelable(false)
-            .setNegativeButton("Close") { dialog, which -> showToastDemo() }.show()
+            .setNegativeButton("Close") { dialog, which -> toastDemo() }.show()
     }
 
     fun snackBarDemo(snackBarScope: CoroutineScope, snackBarHostState: SnackbarHostState) {
@@ -91,5 +98,10 @@ class MainActivity : ComponentActivity() {
                 duration = SnackbarDuration.Short
             )
         }
+    }
+
+    fun vibrationDemo() {
+        val vibrator = getSystemService(Vibrator::class.java)
+        vibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK))
     }
 }
