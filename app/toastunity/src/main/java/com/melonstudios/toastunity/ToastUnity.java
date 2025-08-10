@@ -7,7 +7,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 public class ToastUnity extends Application {
-    public void ShowToast(Context context, final String message, final int duration) {
+    public static void ShowToast(Context context, final String message, final int duration) {
         new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, message, duration).show());
     }
 }
